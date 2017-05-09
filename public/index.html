@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="contactApp">
+<head>
+	<title>Contact App</title>
+	<link rel="stylesheet" type="text/css" href="/scripts/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container" ng-controller="appCtrl">
+		<div class="row text-center">
+			<h2>Contact List App</h2>
+		</div>
+		<div class="row">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Number</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="text" ng-model="contact.name" class="form-control" placeholder="Name"></td>
+						<td><input type="text" ng-model="contact.email" class="form-control" placeholder="Email"></td>
+						<td><input type="text" ng-model="contact.number" class="form-control" placeholder="Contact No."></td>
+						<td><button class="btn btn-primary btn-sm" ng-click="addContact()">Add Contact</button></td>
+					</tr>
+					<tr ng-repeat="person in contactlist">
+						<td>
+							<span ng-hide="editMode">{{person.name}}</span>
+							<span ng-show="editMode"><input type="text" ng-model="selected.name" class="form-control"><input type="hidden" ng-model="selected._id"></span>
+						</td>
+						<td>
+							<span ng-hide="editMode">{{person.email}}</span>
+							<span ng-show="editMode"><input type="text" ng-model="selected.email" class="form-control"></span>
+						</td>
+						<td>
+							<span ng-hide="editMode">{{person.number}}</span>
+							<span ng-show="editMode"><input type="text" ng-model="selected.number" class="form-control"></span>
+						</td>
+						<td>
+							<button class="btn btn-primary btn-sm" ng-click="editMode = true; editPerson(person)" ng-hide="editMode">Edit</button>
+							<button class="btn btn-primary btn-sm" ng-show="editMode" ng-click="editContact(selected._id)">Update</button>
+							&nbsp;&nbsp;<button class="btn btn-danger btn-sm" ng-hide="editMode" ng-click="deleteContact(person._id)">Delete</button>
+							<button class="btn btn-danger btn-sm" ng-show="editMode" ng-click="editMode = false">Cancel</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+<script type="text/javascript" src="/scripts/angular/angular.min.js"></script>
+<script type="text/javascript" src="/scripts/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/scripts/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="controller/controller.js"></script>
+</body>
+</html>
